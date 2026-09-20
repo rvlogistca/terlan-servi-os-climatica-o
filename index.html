@@ -118,7 +118,7 @@
             gap: 15px;
         }
 
-        /* ===== ITEM DE SERVIÇO ===== */
+        /* ===== ITEM DE INSTALAÇÃO ===== */
         .servico-item {
             background: rgba(0,82,204,0.1);
             border-left: 3px solid var(--azul-destaque);
@@ -129,17 +129,18 @@
         /* ===== BOTÃO QUE ABRE E FECHA ===== */
         .servico-botao {
             width: 100%;
-            padding: 18px 20px;
+            padding: 20px;
             background: transparent;
             border: none;
             color: var(--branco);
-            font-size: 17px;
+            font-size: 18px;
             font-weight: 600;
             text-align: left;
             cursor: pointer;
             display: flex;
-            justify-content: space-between;
+            flex-direction: column;
             align-items: center;
+            gap: 8px;
             transition: 0.3s;
         }
 
@@ -147,13 +148,32 @@
             background: rgba(0,82,204,0.15);
         }
 
+        .botao-cabecalho {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            width: 100%;
+            justify-content: center;
+        }
+
+        .icone-ar {
+            font-size: 28px;
+        }
+
         .seta {
             transition: transform 0.3s ease;
-            font-size: 14px;
+            font-size: 16px;
         }
 
         .servico-botao.aberto .seta {
             transform: rotate(90deg);
+        }
+
+        .texto-botao {
+            font-size: 13px;
+            color: #00FFCC;
+            opacity: 0.85;
+            margin-top: 2px;
         }
 
         /* ===== CONTEÚDO QUE ABRE ===== */
@@ -199,7 +219,7 @@
             color: #22C55E;
         }
 
-        /* ===== OUTROS SERVIÇOS SEM ABRIR ===== */
+        /* ===== OUTROS SERVIÇOS ===== */
         .servico-simples {
             padding: 18px 20px;
         }
@@ -208,6 +228,9 @@
             font-size: 17px;
             margin-bottom: 8px;
             color: var(--branco);
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .servico-simples p {
@@ -334,11 +357,15 @@
             <h2>🔧 Nossos Serviços</h2>
             <div class="servicos-grid">
 
-                <!-- 📦 INSTALAÇÃO — QUE ABRE E FECHA -->
+                <!-- 🧊 INSTALAÇÃO COM ÍCONE DE AR CONDICIONADO -->
                 <div class="servico-item" style="border-left-color: #22C55E;">
                     <button class="servico-botao" onclick="abrirFechar(this)">
-                        <span>📦 Instalação</span>
-                        <span class="seta">▶</span>
+                        <div class="botao-cabecalho">
+                            <span class="icone-ar">🧊</span>
+                            <span style="font-size: 20px; font-weight: bold;">Instalação</span>
+                            <span class="seta">▶</span>
+                        </div>
+                        <span class="texto-botao">👆 Aperte aqui para abrir</span>
                     </button>
                     <div class="servico-conteudo">
                         <p><strong>✅ Sobre o Profissional:</strong><br>
@@ -480,7 +507,6 @@
         </footer>
     </div>
 
-    <!-- ✅ JAVASCRIPT PARA ABRIR E FECHAR -->
     <script>
         function abrirFechar(botao) {
             const conteudo = botao.nextElementSibling;
