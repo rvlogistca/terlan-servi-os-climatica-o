@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -9,570 +10,775 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', sans-serif;
         }
 
         :root {
-            --azul-escuro: #0A1629;
-            --azul-medio: #0F2A55;
-            --azul-destaque: #0052CC;
-            --preto: #050A12;
-            --branco: #FFFFFF;
-            --cinza: #B0B8C4;
-            --ouro: #D4AF37;
-            --verde: #22C55E;
+            --azul-profundo: #06101F;
+            --azul-escuro: #0B1C33;
+            --azul-medio: #122B4A;
+            --azul-destaque: #00A8E8;
+            --azul-claro: #4FC3F7;
+            --branco: #F8FAFC;
+            --cinza-claro: #CBD5E1;
+            --cinza: #94A3B8;
+        }
+
+        /* ===== SCROLL SUAVE ===== */
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px; /* Compensa o menu fixo */
         }
 
         body {
-            background: linear-gradient(135deg, var(--preto) 0%, var(--azul-escuro) 50%, var(--azul-medio) 100%);
-            min-height: 100vh;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--azul-profundo);
             color: var(--branco);
+            line-height: 1.65;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
         }
 
         .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        .fotos-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            margin-bottom: 40px;
-        }
-
-        .foto-card {
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
-            transform-style: preserve-3d;
-            transform: perspective(1000px) rotateX(2deg);
-            transition: all 0.4s ease;
-            border: 2px solid rgba(0,82,204,0.3);
-        }
-
-        .foto-card:hover {
-            transform: perspective(1000px) rotateX(0deg) translateY(-10px);
-            box-shadow: 0 20px 60px rgba(0,82,204,0.3);
-            border-color: var(--azul-destaque);
-        }
-
-        .foto-card img {
             width: 100%;
-            height: 100%;
-            object-fit: cover;
+            max-width: 100%;
+            margin: 0 auto;
         }
 
-        header {
-            text-align: center;
-            padding: 20px 20px 40px;
+        /* ===== ANIMAÇÕES ===== */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(28px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        .logo-3d {
-            font-size: 70px;
-            text-shadow: 
-                0 0 10px var(--azul-destaque),
-                0 0 20px var(--azul-destaque),
-                0 10px 30px rgba(0,0,0,0.5);
-            animation: flutuar 3s ease-in-out infinite;
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
-        @keyframes flutuar {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+        @keyframes softPulse {
+            0%, 100% {
+                filter: drop-shadow(0 0 14px rgba(0, 168, 232, 0.4));
+                transform: scale(1);
+            }
+            50% {
+                filter: drop-shadow(0 0 22px rgba(0, 168, 232, 0.65));
+                transform: scale(1.04);
+            }
         }
 
-        h1 {
-            font-size: 32px;
-            margin-top: 15px;
-            background: linear-gradient(90deg, #0099FF, #00FFCC);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-24px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
         }
 
-        .subtitulo {
-            font-size: 18px;
-            color: var(--cinza);
-            margin-top: 10px;
+        @keyframes glowLine {
+            0% { width: 0; opacity: 0; }
+            100% { width: 48px; opacity: 1; }
         }
 
-        .cnpj-topo {
-            font-size: 13px;
-            color: #5A7099;
-            margin-top: 8px;
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-12px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        .botoes-contato {
+        /* ===== MENU DE NAVEGAÇÃO ===== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(6, 16, 31, 0.92);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-bottom: 1px solid rgba(0, 168, 232, 0.12);
+            transition: background 0.3s ease, box-shadow 0.3s ease;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        .navbar-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+            height: 64px;
             display: flex;
-            gap: 15px;
-            justify-content: center;
-            margin-top: 25px;
-            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
         }
 
-        .btn-whatsapp, .btn-instagram {
-            display: inline-flex;
+        .nav-logo {
+            display: flex;
             align-items: center;
             gap: 10px;
-            padding: 12px 28px;
-            border-radius: 50px;
-            font-size: 16px;
-            font-weight: bold;
             text-decoration: none;
+            color: var(--branco);
+            font-weight: 700;
+            font-size: 16px;
+            letter-spacing: 0.3px;
+            transition: opacity 0.25s ease;
+        }
+
+        .nav-logo:hover {
+            opacity: 0.85;
+        }
+
+        .nav-logo span {
+            background: linear-gradient(90deg, #00B4F0, #00E5C3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--cinza-claro);
+            text-decoration: none;
+            font-size: 14.5px;
+            font-weight: 500;
+            padding: 8px 14px;
+            border-radius: 8px;
+            transition: color 0.25s ease, background 0.25s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--azul-claro);
+            background: rgba(0, 168, 232, 0.1);
+        }
+
+        .nav-cta {
+            background: linear-gradient(135deg, #25D366, #1DA851) !important;
+            color: #fff !important;
+            padding: 9px 18px !important;
+            border-radius: 10px !important;
+            font-weight: 600 !important;
+            box-shadow: 0 4px 14px rgba(37, 211, 102, 0.3);
+            transition: transform 0.25s ease, box-shadow 0.25s ease !important;
+        }
+
+        .nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(37, 211, 102, 0.4) !important;
+            background: linear-gradient(135deg, #2BE06E, #22B85A) !important;
+        }
+
+        /* Hamburger */
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            position: relative;
+            z-index: 1001;
+        }
+
+        .nav-toggle span {
+            display: block;
+            width: 22px;
+            height: 2px;
+            background: var(--branco);
+            margin: 5px auto;
+            border-radius: 2px;
             transition: all 0.3s ease;
         }
 
+        .nav-toggle.active span:nth-child(1) {
+            transform: translateY(7px) rotate(45deg);
+        }
+
+        .nav-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .nav-toggle.active span:nth-child(3) {
+            transform: translateY(-7px) rotate(-45deg);
+        }
+
+        /* Mobile menu */
+        .nav-mobile {
+            display: none;
+            position: fixed;
+            top: 64px;
+            left: 0;
+            width: 100%;
+            background: rgba(6, 16, 31, 0.97);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(0, 168, 232, 0.15);
+            padding: 16px 20px 24px;
+            flex-direction: column;
+            gap: 6px;
+            animation: slideDown 0.3s ease-out;
+            z-index: 999;
+        }
+
+        .nav-mobile a {
+            color: var(--cinza-claro);
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            padding: 14px 16px;
+            border-radius: 10px;
+            transition: background 0.25s ease, color 0.25s ease;
+        }
+
+        .nav-mobile a:hover {
+            background: rgba(0, 168, 232, 0.12);
+            color: var(--azul-claro);
+        }
+
+        .nav-mobile .nav-cta {
+            text-align: center;
+            margin-top: 8px;
+        }
+
+        /* ===== HEADER ===== */
+        header {
+            text-align: center;
+            padding: 120px 24px 36px;
+            background: linear-gradient(180deg, var(--azul-escuro) 0%, var(--azul-profundo) 100%);
+            border-bottom: 1px solid rgba(0, 168, 232, 0.12);
+        }
+
+        .logo-icone {
+            font-size: 52px;
+            margin-bottom: 12px;
+            line-height: 1;
+            animation: softPulse 3.5s ease-in-out infinite, fadeIn 0.8s ease-out;
+        }
+
+        h1 {
+            font-size: 26px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+            background: linear-gradient(90deg, #00B4F0, #00E5C3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 0.7s ease-out 0.15s both;
+        }
+
+        .subtitulo {
+            font-size: 15px;
+            color: var(--cinza-claro);
+            margin-bottom: 10px;
+            font-weight: 400;
+            animation: fadeInUp 0.7s ease-out 0.3s both;
+        }
+
+        .localizacao {
+            font-size: 14px;
+            color: var(--azul-destaque);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(0, 168, 232, 0.1);
+            padding: 6px 14px;
+            border-radius: 20px;
+            border: 1px solid rgba(0, 168, 232, 0.2);
+            animation: fadeInUp 0.7s ease-out 0.45s both;
+            transition: background 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .localizacao:hover {
+            background: rgba(0, 168, 232, 0.18);
+            border-color: rgba(0, 168, 232, 0.4);
+            transform: translateY(-1px);
+        }
+
+        /* ===== BOTÕES DE CONTATO ===== */
+        .botoes-contato {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            padding: 32px 24px 28px;
+            max-width: 420px;
+            margin: 0 auto;
+        }
+
+        .btn-whatsapp,
+        .btn-instagram {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 17px 28px;
+            border-radius: 14px;
+            font-size: 16.5px;
+            font-weight: 600;
+            text-decoration: none;
+            letter-spacing: 0.2px;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
         .btn-whatsapp {
-            background: linear-gradient(135deg, #25D366, #1FB955);
-            color: white;
-            box-shadow: 0 5px 20px rgba(37,211,102,0.35);
+            background: linear-gradient(135deg, #25D366 0%, #1DA851 100%);
+            color: #fff;
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.28);
+            animation: fadeInUp 0.7s ease-out 0.55s both;
+        }
+
+        .btn-instagram {
+            background: linear-gradient(135deg, #E1306C, #C13584, #833AB4);
+            color: #fff;
+            box-shadow: 0 6px 20px rgba(225, 48, 108, 0.25);
+            animation: fadeInUp 0.7s ease-out 0.7s both;
         }
 
         .btn-whatsapp:hover {
             transform: translateY(-3px);
-            box-shadow: 0 8px 30px rgba(37,211,102,0.5);
-        }
-
-        .btn-instagram {
-            background: linear-gradient(135deg, #E4405F, #C13584, #833AB4);
-            color: white;
-            box-shadow: 0 5px 20px rgba(228,64,95,0.25);
+            box-shadow: 0 10px 28px rgba(37, 211, 102, 0.42);
         }
 
         .btn-instagram:hover {
             transform: translateY(-3px);
-            box-shadow: 0 8px 30px rgba(228,64,95,0.4);
+            box-shadow: 0 10px 28px rgba(225, 48, 108, 0.4);
         }
 
-        .card-3d {
-            background: linear-gradient(145deg, rgba(15,42,85,0.8), rgba(10,22,41,0.9));
-            border: 1px solid rgba(0,82,204,0.3);
-            border-radius: 20px;
-            padding: 30px;
-            margin-bottom: 30px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+        .btn-whatsapp:active,
+        .btn-instagram:active {
+            transform: scale(0.97);
         }
 
-        .card-3d h2 {
-            font-size: 24px;
-            margin-bottom: 25px;
-            color: #00CCFF;
-        }
-
-        .servicos-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 15px;
-        }
-
-        .servico-item {
-            background: rgba(0,82,204,0.1);
-            border-left: 3px solid var(--azul-destaque);
-            border-radius: 12px;
-            overflow: hidden;
-        }
-
-        .servico-botao {
+        /* ===== IMAGENS ===== */
+        .imagem-destaque {
             width: 100%;
-            padding: 20px;
-            background: transparent;
-            border: none;
+            overflow: hidden;
+            animation: fadeIn 1s ease-out 0.4s both;
+        }
+
+        .imagem-destaque img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .imagem-destaque:hover img {
+            transform: scale(1.02);
+        }
+
+        /* ===== SEÇÕES ===== */
+        .secao {
+            padding: 56px 24px;
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        .secao-titulo {
+            font-size: 22px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 36px;
             color: var(--branco);
-            font-size: 18px;
+            letter-spacing: 0.3px;
+            position: relative;
+            animation: fadeInUp 0.7s ease-out both;
+        }
+
+        .secao-titulo::after {
+            content: '';
+            height: 3px;
+            background: linear-gradient(90deg, #00B4F0, #00E5C3);
+            display: block;
+            margin: 12px auto 0;
+            border-radius: 3px;
+            animation: glowLine 0.8s ease-out 0.3s both;
+        }
+
+        /* ===== CARDS DE SERVIÇO ===== */
+        .servico-card {
+            background: rgba(18, 43, 74, 0.55);
+            border-radius: 16px;
+            padding: 26px 24px;
+            margin-bottom: 18px;
+            border: 1px solid rgba(0, 168, 232, 0.15);
+            transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+            animation: fadeInUp 0.65s ease-out both;
+        }
+
+        .servico-card:nth-child(2) { animation-delay: 0.1s; }
+        .servico-card:nth-child(3) { animation-delay: 0.2s; }
+        .servico-card:nth-child(4) { animation-delay: 0.3s; }
+        .servico-card:nth-child(5) { animation-delay: 0.4s; }
+
+        .servico-card:hover {
+            border-color: rgba(0, 168, 232, 0.4);
+            background: rgba(18, 43, 74, 0.8);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25);
+        }
+
+        .servico-titulo {
+            font-size: 17.5px;
             font-weight: 600;
-            text-align: left;
-            cursor: pointer;
+            margin-bottom: 10px;
+            color: var(--azul-claro);
             display: flex;
-            flex-direction: column;
             align-items: center;
             gap: 8px;
-            transition: 0.3s;
+            transition: color 0.3s ease;
         }
 
-        .servico-botao:hover {
-            background: rgba(0,82,204,0.15);
+        .servico-card:hover .servico-titulo {
+            color: #7DD3FC;
         }
 
-        .botao-cabecalho {
+        .servico-texto {
+            color: var(--cinza-claro);
+            font-size: 14.5px;
+            line-height: 1.75;
+        }
+
+        .lista-marcas {
             display: flex;
-            align-items: center;
-            gap: 12px;
-            width: 100%;
-            justify-content: center;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 14px;
         }
 
-        .icone-ar {
-            font-size: 28px;
-        }
-
-        .seta {
-            transition: transform 0.3s ease;
-            font-size: 16px;
-        }
-
-        .servico-botao.aberto .seta {
-            transform: rotate(90deg);
-        }
-
-        .texto-botao {
+        .marca-tag {
+            background: rgba(0, 168, 232, 0.12);
+            color: var(--azul-claro);
+            padding: 5px 13px;
+            border-radius: 20px;
             font-size: 13px;
-            color: #00FFCC;
-            opacity: 0.85;
-            margin-top: 2px;
+            font-weight: 500;
+            border: 1px solid rgba(0, 168, 232, 0.18);
+            transition: all 0.25s ease;
         }
 
-        .servico-conteudo {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.4s ease, padding 0.3s ease;
-            padding: 0 20px;
+        .marca-tag:hover {
+            background: rgba(0, 168, 232, 0.22);
+            border-color: rgba(0, 168, 232, 0.4);
+            transform: translateY(-1px);
         }
 
-        .servico-conteudo.aberto {
-            max-height: 2000px;
-            padding: 0 20px 20px;
+        /* ===== CONTATO ===== */
+        .contato-card {
+            background: linear-gradient(145deg, rgba(12, 40, 80, 0.7), rgba(8, 28, 58, 0.85));
+            border-radius: 18px;
+            padding: 36px 28px;
+            text-align: center;
+            border: 1px solid rgba(0, 168, 232, 0.22);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+            animation: fadeInUp 0.75s ease-out both;
+            transition: border-color 0.35s ease, box-shadow 0.35s ease;
         }
 
-        .servico-conteudo p {
-            font-size: 14px;
+        .contato-card:hover {
+            border-color: rgba(0, 168, 232, 0.4);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+        }
+
+        .contato-item {
+            margin-bottom: 22px;
+            animation: slideInLeft 0.6s ease-out both;
+        }
+
+        .contato-item:nth-child(1) { animation-delay: 0.15s; }
+        .contato-item:nth-child(2) { animation-delay: 0.3s; }
+        .contato-item:nth-child(3) { animation-delay: 0.45s; }
+        .contato-item:nth-child(4) { animation-delay: 0.6s; }
+
+        .contato-item strong {
+            display: block;
+            font-size: 13px;
             color: var(--cinza);
-            line-height: 1.7;
-            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-bottom: 5px;
+            font-weight: 600;
         }
 
-        .servico-conteudo ul {
-            padding-left: 20px;
-            margin: 10px 0;
-        }
-
-        .servico-conteudo li {
-            margin-bottom: 6px;
-            color: #ccc;
-            font-size: 14px;
-        }
-
-        .destaque {
-            background: rgba(34,197,94,0.1);
-            border: 1px solid rgba(34,197,94,0.4);
-            border-radius: 10px;
-            padding: 15px;
-            margin-top: 15px;
-        }
-
-        .destaque strong {
-            color: #22C55E;
-        }
-
-        .servico-simples {
-            padding: 18px 20px;
-        }
-
-        .servico-simples h3 {
+        .contato-item a {
+            color: #5EEAD4;
+            text-decoration: none;
+            font-weight: 600;
             font-size: 17px;
-            margin-bottom: 8px;
-            color: var(--branco);
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            transition: color 0.25s ease, letter-spacing 0.25s ease;
         }
 
-        .servico-simples p {
-            font-size: 14px;
-            color: var(--cinza);
+        .contato-item a:hover {
+            color: #99F6E4;
+            letter-spacing: 0.4px;
+        }
+
+        .contato-item {
+            font-size: 15.5px;
+            color: var(--cinza-claro);
+        }
+
+        .cnpj-badge {
+            margin-top: 28px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(0, 168, 232, 0.15);
+            font-size: 13px;
+            color: #64748B;
             line-height: 1.6;
         }
 
-        .marcas-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            justify-content: center;
-        }
-
-        .marca-badge {
-            background: linear-gradient(145deg, #112240, #0A1629);
-            border: 1px solid rgba(0,153,255,0.3);
-            padding: 10px 18px;
-            border-radius: 25px;
-            font-weight: 600;
-            color: #00CCFF;
-        }
-
-        .avaliacoes-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-        }
-
-        .avaliacao-card {
-            background: rgba(0,0,0,0.3);
-            border-radius: 15px;
-            padding: 22px;
-            border: 1px solid rgba(212,175,55,0.2);
-        }
-
-        .estrelas {
-            color: var(--ouro);
-            font-size: 18px;
-            margin-bottom: 12px;
-        }
-
-        .avaliacao-texto {
-            font-style: italic;
-            color: #ddd;
-            margin-bottom: 15px;
-            font-size: 15px;
-        }
-
-        .cliente-nome {
-            font-weight: bold;
-            color: #00FFCC;
-        }
-
-        .contato-card {
-            background: linear-gradient(135deg, #003380, #0052CC);
-            text-align: center;
-        }
-
-        .contato-card p {
-            font-size: 16px;
-            margin: 10px 0;
-        }
-
-        .contato-card a {
-            color: #FFD700;
-            font-weight: bold;
-            text-decoration: none;
-        }
-
-        .info-empresa {
-            margin-top: 25px;
-            padding: 18px;
-            background: rgba(0,0,0,0.2);
-            border-radius: 12px;
-            border: 1px solid rgba(0,153,255,0.15);
-        }
-
-        .info-empresa p {
-            font-size: 13px;
-            color: #9AB;
-            margin: 5px 0;
-        }
-
+        /* ===== FOOTER ===== */
         footer {
             text-align: center;
-            padding: 30px;
+            padding: 40px 24px 48px;
             color: var(--cinza);
-            font-size: 14px;
-            border-top: 1px solid rgba(0,82,204,0.15);
-            margin-top: 10px;
+            font-size: 13.5px;
+            border-top: 1px solid rgba(0, 168, 232, 0.1);
+            background: var(--azul-escuro);
+            animation: fadeIn 1s ease-out 0.5s both;
         }
 
+        footer p:first-child {
+            color: var(--cinza-claro);
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+
+        /* ===== RESPONSIVO ===== */
         @media (max-width: 768px) {
-            h1 { font-size: 24px; }
-            .logo-3d { font-size: 50px; }
-            .card-3d { padding: 20px; }
+            .nav-links {
+                display: none;
+            }
+
+            .nav-toggle {
+                display: block;
+            }
+
+            .nav-mobile.open {
+                display: flex;
+            }
+        }
+
+        @media (min-width: 480px) {
+            h1 {
+                font-size: 30px;
+            }
+            .secao-titulo {
+                font-size: 24px;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .botoes-contato {
+                flex-direction: row;
+                max-width: 520px;
+            }
+            .btn-whatsapp,
+            .btn-instagram {
+                flex: 1;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- MENU DE NAVEGAÇÃO -->
+    <nav class="navbar">
+        <div class="navbar-inner">
+            <a href="#" class="nav-logo">
+                ❄️ <span>Terlan</span>
+            </a>
+
+            <ul class="nav-links">
+                <li><a href="#">Início</a></li>
+                <li><a href="#servicos">Serviços</a></li>
+                <li><a href="#contato">Contato</a></li>
+                <li>
+                    <a href="https://wa.me/5569999176222?text=Olá! Vim pelo site e gostaria de um orçamento." 
+                       target="_blank" 
+                       class="nav-cta">
+                        WhatsApp
+                    </a>
+                </li>
+            </ul>
+
+            <button class="nav-toggle" id="navToggle" aria-label="Abrir menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+
+        <!-- Menu Mobile -->
+        <div class="nav-mobile" id="navMobile">
+            <a href="#" onclick="fecharMenu()">Início</a>
+            <a href="#servicos" onclick="fecharMenu()">Serviços</a>
+            <a href="#contato" onclick="fecharMenu()">Contato</a>
+            <a href="https://wa.me/5569999176222?text=Olá! Vim pelo site e gostaria de um orçamento." 
+               target="_blank" 
+               class="nav-cta"
+               onclick="fecharMenu()">
+                Falar no WhatsApp
+            </a>
+        </div>
+    </nav>
+
     <div class="container">
+        <!-- Cabeçalho -->
         <header>
-            <div class="logo-3d">❄️</div>
-            <h1>TERLAN CLIMATIZAÇÃO LTDA</h1>
-            <p class="subtitulo">Éder Terlan — Conserto • Instalação • Manutenção de Ar Condicionado</p>
-            <p style="margin-top: 10px; color: #00FFCC;">📍 Cerejeiras e Região — Rondônia</p>
-            <p class="cnpj-topo">CNPJ: 39.827.701/0001-34</p>
-            
-            <div class="botoes-contato">
-                <a href="https://wa.me/5569999176222?text=Olá! Vi seu site e gostaria de agendar um serviço de Ar Condicionado. Preciso de [instalação / manutenção / conserto / recarga de gás]. Pode me informar os horários disponíveis? Obrigado!" 
-                   target="_blank" class="btn-whatsapp">
-                    💬 Agende pelo WhatsApp
-                </a>
-                <a href="https://www.instagram.com/terlan_climatizacao" target="_blank" class="btn-instagram">
-                    📷 Instagram
-                </a>
-            </div>
+            <div class="logo-icone">❄️</div>
+            <h1>TERLAN CLIMATIZAÇÃO</h1>
+            <p class="subtitulo">Éder Terlan • Conserto • Instalação • Manutenção</p>
+            <p class="localizacao">📍 Cerejeiras e Região — Rondônia</p>
         </header>
 
-        <div class="fotos-grid">
-            <div class="foto-card">
-                <img src="instalacao-terlan.jpg" alt="Instalação e Manutenção de Ar Condicionado">
-            </div>
-            <div class="foto-card">
-                <img src="contato-terlan.jpg" alt="Precisando de Chamar — Terlan Climatização">
-            </div>
+        <!-- Botões de Contato -->
+        <div class="botoes-contato">
+            <a href="https://wa.me/5569999176222?text=Olá! Vim pelo site e gostaria de um orçamento." target="_blank" class="btn-whatsapp">
+                💬 Falar no WhatsApp
+            </a>
+            <a href="https://www.instagram.com/terlan_climatizacao" target="_blank" class="btn-instagram">
+                📷 Seguir no Instagram
+            </a>
         </div>
 
-        <div class="card-3d">
-            <h2>🔧 Nossos Serviços</h2>
-            <div class="servicos-grid">
-
-                <div class="servico-item" style="border-left-color: #22C55E;">
-                    <button class="servico-botao" onclick="abrirFechar(this)">
-                        <div class="botao-cabecalho">
-                            <span class="icone-ar" aria-label="Ar-condicionado moderno" title="Ar-condicionado">
-    <svg width="32" height="32" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <rect x="6" y="16" width="52" height="25" rx="7" stroke="currentColor" stroke-width="4"/>
-        <path d="M14 27H50" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
-        <path d="M20 47V53M32 47V57M44 47V53" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
-        <path d="M21 34H43" stroke="#00FFCC" stroke-width="3" stroke-linecap="round"/>
-    </svg>
-</span>
-                            <span style="font-size: 20px; font-weight: bold;">Instalação</span>
-                            <span class="seta">▶</span>
-                        </div>
-                        <span class="texto-botao">👆 Aperte aqui para abrir</span>
-                    </button>
-                    <div class="servico-conteudo">
-                        <p><strong>✅ Sobre o Profissional:</strong><br>
-                        Técnico certificado e registrado, autorizado por todas as principais marcas de ar-condicionado do mercado.</p>
-
-                        <p><strong>🏷️ Marcas Autorizadas:</strong></p>
-                        <ul>
-                            <li>Samsung</li>
-                            <li>LG</li>
-                            <li>Daikin</li>
-                            <li>Gree</li>
-                            <li>Midea</li>
-                            <li>Springer</li>
-                            <li>Elgin</li>
-                            <li>Philco</li>
-                            <li>Consul</li>
-                            <li>Brastemp</li>
-                        </ul>
-
-                        <p><strong>🔧 Materiais Necessários:</strong></p>
-                        <ul>
-                            <li>Tubulação de cobre</li>
-                            <li>Isolamento térmico</li>
-                            <li>Suportes e parafusos</li>
-                            <li>Fiação elétrica certificada</li>
-                            <li>Tubo de dreno</li>
-                            <li>Massa de vedação</li>
-                            <li>Fita de acabamento</li>
-                        </ul>
-
-                        <div class="destaque">
-                            <strong>💰 Sobre o Orçamento:</strong><br>
-                            O valor da instalação é orçado conforme a estrutura do ambiente e do prédio. O valor final será definido com base nas condições do local de instalação. Todos os materiais necessários estarão incluídos no orçamento — o valor dos materiais será detalhado e aplicado no orçamento completo.
-                        </div>
-                    </div>
-                </div>
-
-                <div class="servico-item">
-                    <div class="servico-simples">
-                        <h3>🛠️ Conserto</h3>
-                        <p>Reparo técnico especializado. Resolvemos vazamentos, barulhos, não liga, não gela e mais problemas. Diagnóstico preciso.</p>
-                    </div>
-                </div>
-
-                <div class="servico-item">
-                    <div class="servico-simples">
-                        <h3>🧹 Manutenção Preventiva</h3>
-                        <p>Limpeza completa, higienização, verificação de gás e componentes. Aumenta a vida útil do aparelho.</p>
-                    </div>
-                </div>
-
-                <div class="servico-item">
-                    <div class="servico-simples">
-                        <h3>🔄 Recarga de Gás</h3>
-                        <p>Recarga de gás refrigerante com equipamentos certificados.</p>
-                    </div>
-                </div>
-
-                <div class="servico-item">
-                    <div class="servico-simples">
-                        <h3>🏠 Residencial</h3>
-                        <p>Atendimento domiciliar com horário agendado.</p>
-                    </div>
-                </div>
-
-                <div class="servico-item">
-                    <div class="servico-simples">
-                        <h3>🏢 Comercial</h3>
-                        <p>Contratos de manutenção para empresas, lojas e escritórios.</p>
-                    </div>
-                </div>
-            </div>
+        <!-- Imagem 1 -->
+        <div class="imagem-destaque">
+            <img src="instalacao-terlan.jpg" alt="Instalação de Ar Condicionado">
         </div>
 
-        <div class="card-3d">
-            <h2>🏷️ Marcas Autorizadas & Trabalhadas</h2>
-            <div class="marcas-grid">
-                <span class="marca-badge">Samsung</span>
-                <span class="marca-badge">LG</span>
-                <span class="marca-badge">Daikin</span>
-                <span class="marca-badge">Gree</span>
-                <span class="marca-badge">Midea</span>
-                <span class="marca-badge">Springer</span>
-                <span class="marca-badge">Elgin</span>
-                <span class="marca-badge">Philco</span>
-                <span class="marca-badge">Consul</span>
-                <span class="marca-badge">Brastemp</span>
-            </div>
-            <p style="text-align: center; margin-top: 20px; color: #9AB;">
-                ✅ Técnico certificado e registrado — autorizado por todas as marcas acima
-            </p>
-        </div>
+        <!-- Seção Serviços -->
+        <section class="secao" id="servicos">
+            <h2 class="secao-titulo">Nossos Serviços</h2>
 
-        <div class="card-3d">
-            <h2>⭐ Avaliações de Clientes</h2>
-            <div class="avaliacoes-grid">
-                <div class="avaliacao-card">
-                    <div class="estrelas">★★★★★</div>
-                    <p class="avaliacao-texto">"Excelente profissional! Instalou meu ar-condicionado com capricho, limpou tudo depois. Recomendo!"</p>
-                    <p class="cliente-nome">— Maria Silva</p>
-                </div>
-                <div class="avaliacao-card">
-                    <div class="estrelas">★★★★★</div>
-                    <p class="avaliacao-texto">"Meu ar parou de gelar, consertou no mesmo dia. Preço justo e serviço de qualidade."</p>
-                    <p class="cliente-nome">— João Pereira</p>
-                </div>
-                <div class="avaliacao-card">
-                    <div class="estrelas">★★★★★</div>
-                    <p class="avaliacao-texto">"Contratei manutenção preventiva anual. Sempre pontual e muito educado. Ótimo atendimento!"</p>
-                    <p class="cliente-nome">— Ana Costa</p>
-                </div>
-                <div class="avaliacao-card">
-                    <div class="estrelas">★★★★★</div>
-                    <p class="avaliacao-texto">"Atendeu minha loja com rapidez e profissionalismo. Serviço nota 10!"</p>
-                    <p class="cliente-nome">— Carlos Mendes</p>
+            <div class="servico-card">
+                <h3 class="servico-titulo">🔧 Instalação</h3>
+                <p class="servico-texto">
+                    Instalação profissional com materiais de qualidade. Técnico certificado e registrado, autorizado por todas as principais marcas do mercado.
+                </p>
+                <div class="lista-marcas">
+                    <span class="marca-tag">Samsung</span>
+                    <span class="marca-tag">LG</span>
+                    <span class="marca-tag">Daikin</span>
+                    <span class="marca-tag">Gree</span>
+                    <span class="marca-tag">Midea</span>
+                    <span class="marca-tag">Springer</span>
+                    <span class="marca-tag">Elgin</span>
+                    <span class="marca-tag">Philco</span>
+                    <span class="marca-tag">Consul</span>
+                    <span class="marca-tag">Brastemp</span>
                 </div>
             </div>
+
+            <div class="servico-card">
+                <h3 class="servico-titulo">🛠️ Conserto</h3>
+                <p class="servico-texto">
+                    Reparo técnico especializado. Resolvemos vazamentos, barulhos, não liga, não gela e mais problemas. Diagnóstico preciso e transparente.
+                </p>
+            </div>
+
+            <div class="servico-card">
+                <h3 class="servico-titulo">🧹 Manutenção Preventiva</h3>
+                <p class="servico-texto">
+                    Limpeza completa, higienização, verificação de gás e componentes. Aumenta a vida útil do aparelho e garante ar mais saudável para sua família.
+                </p>
+            </div>
+
+            <div class="servico-card">
+                <h3 class="servico-titulo">🏠 Residencial • 🏢 Comercial</h3>
+                <p class="servico-texto">
+                    Atendimento para residências, comércios e empresas. Orçamento sem compromisso e horário agendado conforme sua conveniência.
+                </p>
+            </div>
+        </section>
+
+        <!-- Imagem 2 -->
+        <div class="imagem-destaque">
+            <img src="contato-terlan.jpg" alt="Atendimento e Contato">
         </div>
 
-        <div class="card-3d contato-card">
-            <h2>📞 Solicite seu Atendimento</h2>
-            <p><strong>📱 WhatsApp / Telefone — Éder:</strong></p>
-            <p style="font-size: 22px; font-weight: bold;">
-                <a href="https://wa.me/5569999176222">(69) 99917-6222</a>
-            </p>
-            <p><strong>📧 E-mail:</strong> <a href="mailto:escritorioancora1@hotmail.com">escritorioancora1@hotmail.com</a></p>
-            <p><strong>📷 Instagram:</strong> <a href="https://www.instagram.com/terlan_climatizacao" target="_blank">@terlan_climatizacao</a></p>
-            <p><strong>📍 Endereço:</strong> Sítio Linha 3, SN — Cerejeiras/RO — CEP 76997-000</p>
+        <!-- Seção Contato -->
+        <section class="secao" id="contato">
+            <h2 class="secao-titulo">Fale Conosco</h2>
             
-            <div class="info-empresa">
-                <p><strong>🏢 Razão Social:</strong> Terlan Climatização LTDA</p>
-                <p><strong>📌 CNPJ:</strong> 39.827.701/0001-34</p>
-                <p><strong>✅ Situação:</strong> Ativa desde 18/11/2020 — Simples Nacional — Microempresa</p>
+            <div class="contato-card">
+                <div class="contato-item">
+                    <strong>📱 WhatsApp</strong>
+                    <a href="https://wa.me/5569999176222">(69) 99917-6222</a>
+                </div>
+                <div class="contato-item">
+                    <strong>📧 E-mail</strong>
+                    <a href="mailto:escritorioancora1@hotmail.com">escritorioancora1@hotmail.com</a>
+                </div>
+                <div class="contato-item">
+                    <strong>📍 Endereço</strong>
+                    Sítio Linha 3, SN — Cerejeiras/RO<br>CEP: 76997-000
+                </div>
+                <div class="contato-item cnpj-badge">
+                    CNPJ: 39.827.701/0001-34<br>
+                    Terlan Climatização LTDA
+                </div>
             </div>
-        </div>
+        </section>
 
+        <!-- Rodapé -->
         <footer>
-            <p>© 2026 Terlan Climatização LTDA — Éder Terlan | Todos os direitos reservados</p>
-            <p>CNPJ: 39.827.701/0001-34 | Cerejeiras — Rondônia</p>
-            <p style="margin-top: 5px;">Atendimento com Garantia • Satisfação e Qualidade</p>
+            <p>© 2026 Terlan Climatização — Éder Terlan</p>
+            <p style="margin-top: 6px;">Atendimento com Garantia • Satisfação e Qualidade</p>
         </footer>
     </div>
 
     <script>
-        function abrirFechar(botao) {
-            const conteudo = botao.nextElementSibling;
-            botao.classList.toggle('aberto');
-            conteudo.classList.toggle('aberto');
+        // Menu Mobile
+        const toggle = document.getElementById('navToggle');
+        const mobileMenu = document.getElementById('navMobile');
+
+        toggle.addEventListener('click', () => {
+            toggle.classList.toggle('active');
+            mobileMenu.classList.toggle('open');
+        });
+
+        function fecharMenu() {
+            toggle.classList.remove('active');
+            mobileMenu.classList.remove('open');
         }
+
+        // Fecha o menu ao clicar fora
+        document.addEventListener('click', (e) => {
+            if (!toggle.contains(e.target) && !mobileMenu.contains(e.target)) {
+                fecharMenu();
+            }
+        });
     </script>
 </body>
 </html>
+```
