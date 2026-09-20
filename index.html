@@ -115,35 +115,73 @@
         .servicos-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
+            gap: 15px;
         }
 
+        /* ===== ITEM DE SERVIÇO ===== */
         .servico-item {
             background: rgba(0,82,204,0.1);
             border-left: 3px solid var(--azul-destaque);
-            padding: 22px;
             border-radius: 12px;
+            overflow: hidden;
         }
 
-        .servico-item h3 {
-            font-size: 18px;
-            margin-bottom: 12px;
+        /* ===== BOTÃO QUE ABRE E FECHA ===== */
+        .servico-botao {
+            width: 100%;
+            padding: 18px 20px;
+            background: transparent;
+            border: none;
             color: var(--branco);
+            font-size: 17px;
+            font-weight: 600;
+            text-align: left;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: 0.3s;
         }
 
-        .servico-item p {
+        .servico-botao:hover {
+            background: rgba(0,82,204,0.15);
+        }
+
+        .seta {
+            transition: transform 0.3s ease;
+            font-size: 14px;
+        }
+
+        .servico-botao.aberto .seta {
+            transform: rotate(90deg);
+        }
+
+        /* ===== CONTEÚDO QUE ABRE ===== */
+        .servico-conteudo {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.3s ease;
+            padding: 0 20px;
+        }
+
+        .servico-conteudo.aberto {
+            max-height: 2000px;
+            padding: 0 20px 20px;
+        }
+
+        .servico-conteudo p {
             font-size: 14px;
             color: var(--cinza);
             line-height: 1.7;
             margin-bottom: 10px;
         }
 
-        .servico-item ul {
+        .servico-conteudo ul {
             padding-left: 20px;
             margin: 10px 0;
         }
 
-        .servico-item li {
+        .servico-conteudo li {
             margin-bottom: 6px;
             color: #ccc;
             font-size: 14px;
@@ -159,6 +197,23 @@
 
         .destaque strong {
             color: #22C55E;
+        }
+
+        /* ===== OUTROS SERVIÇOS SEM ABRIR ===== */
+        .servico-simples {
+            padding: 18px 20px;
+        }
+
+        .servico-simples h3 {
+            font-size: 17px;
+            margin-bottom: 8px;
+            color: var(--branco);
+        }
+
+        .servico-simples p {
+            font-size: 14px;
+            color: var(--cinza);
+            line-height: 1.6;
         }
 
         .marcas-grid {
@@ -196,15 +251,32 @@
             margin-bottom: 12px;
         }
 
+        .avaliacao-texto {
+            font-style: italic;
+            color: #ddd;
+            margin-bottom: 15px;
+            font-size: 15px;
+        }
+
         .cliente-nome {
             font-weight: bold;
             color: #00FFCC;
-            margin-top: 10px;
         }
 
         .contato-card {
             background: linear-gradient(135deg, #003380, #0052CC);
             text-align: center;
+        }
+
+        .contato-card p {
+            font-size: 18px;
+            margin: 12px 0;
+        }
+
+        .contato-card a {
+            color: #FFD700;
+            font-weight: bold;
+            text-decoration: none;
         }
 
         .btn-whatsapp {
@@ -216,7 +288,14 @@
             font-size: 18px;
             font-weight: bold;
             margin-top: 15px;
+            box-shadow: 0 5px 25px rgba(37,211,102,0.4);
+            transition: 0.3s;
             text-decoration: none;
+        }
+
+        .btn-whatsapp:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 35px rgba(37,211,102,0.5);
         }
 
         footer {
@@ -229,6 +308,7 @@
         @media (max-width: 768px) {
             h1 { font-size: 24px; }
             .logo-3d { font-size: 50px; }
+            .card-3d { padding: 20px; }
         }
     </style>
 </head>
@@ -253,66 +333,87 @@
         <div class="card-3d">
             <h2>🔧 Nossos Serviços</h2>
             <div class="servicos-grid">
+
+                <!-- 📦 INSTALAÇÃO — QUE ABRE E FECHA -->
                 <div class="servico-item" style="border-left-color: #22C55E;">
-                    <h3>📦 Instalação</h3>
+                    <button class="servico-botao" onclick="abrirFechar(this)">
+                        <span>📦 Instalação</span>
+                        <span class="seta">▶</span>
+                    </button>
+                    <div class="servico-conteudo">
+                        <p><strong>✅ Sobre o Profissional:</strong><br>
+                        Técnico certificado e registrado, autorizado por todas as principais marcas de ar-condicionado do mercado.</p>
 
-                    <p><strong>✅ Sobre o Profissional:</strong><br>
-                    Técnico certificado e registrado, autorizado por todas as principais marcas de ar-condicionado do mercado.</p>
+                        <p><strong>🏷️ Marcas Autorizadas:</strong></p>
+                        <ul>
+                            <li>Samsung</li>
+                            <li>LG</li>
+                            <li>Daikin</li>
+                            <li>Gree</li>
+                            <li>Midea</li>
+                            <li>Springer</li>
+                            <li>Elgin</li>
+                            <li>Philco</li>
+                            <li>Consul</li>
+                            <li>Brastemp</li>
+                        </ul>
 
-                    <p><strong>🏷️ Marcas Autorizadas:</strong></p>
-                    <ul>
-                        <li>Samsung</li>
-                        <li>LG</li>
-                        <li>Daikin</li>
-                        <li>Gree</li>
-                        <li>Midea</li>
-                        <li>Springer</li>
-                        <li>Elgin</li>
-                        <li>Philco</li>
-                        <li>Consul</li>
-                        <li>Brastemp</li>
-                    </ul>
+                        <p><strong>🔧 Materiais Necessários:</strong></p>
+                        <ul>
+                            <li>Tubulação de cobre</li>
+                            <li>Isolamento térmico</li>
+                            <li>Suportes e parafusos</li>
+                            <li>Fiação elétrica certificada</li>
+                            <li>Tubo de dreno</li>
+                            <li>Massa de vedação</li>
+                            <li>Fita de acabamento</li>
+                        </ul>
 
-                    <p><strong>🔧 Materiais Necessários:</strong></p>
-                    <ul>
-                        <li>Tubulação de cobre</li>
-                        <li>Isolamento térmico</li>
-                        <li>Suportes e parafusos</li>
-                        <li>Fiação elétrica certificada</li>
-                        <li>Tubo de dreno</li>
-                        <li>Massa de vedação</li>
-                        <li>Fita de acabamento</li>
-                    </ul>
-
-                    <div class="destaque">
-                        <strong>💰 Sobre o Orçamento:</strong><br>
-                        O valor da instalação é orçado conforme a estrutura do ambiente e do prédio. O valor final será definido com base nas condições do local de instalação. Todos os materiais necessários estarão incluídos no orçamento — o valor dos materiais será detalhado e aplicado no orçamento completo.
+                        <div class="destaque">
+                            <strong>💰 Sobre o Orçamento:</strong><br>
+                            O valor da instalação é orçado conforme a estrutura do ambiente e do prédio. O valor final será definido com base nas condições do local de instalação. Todos os materiais necessários estarão incluídos no orçamento — o valor dos materiais será detalhado e aplicado no orçamento completo.
+                        </div>
                     </div>
                 </div>
 
+                <!-- 🛠️ CONSERTO -->
                 <div class="servico-item">
-                    <h3>🛠️ Conserto</h3>
-                    <p>Reparo técnico especializado. Resolvemos vazamentos, barulhos, não liga, não gela e mais problemas. Diagnóstico preciso.</p>
+                    <div class="servico-simples">
+                        <h3>🛠️ Conserto</h3>
+                        <p>Reparo técnico especializado. Resolvemos vazamentos, barulhos, não liga, não gela e mais problemas. Diagnóstico preciso.</p>
+                    </div>
                 </div>
 
+                <!-- 🧹 MANUTENÇÃO -->
                 <div class="servico-item">
-                    <h3>🧹 Manutenção Preventiva</h3>
-                    <p>Limpeza completa, higienização, verificação de gás e componentes. Aumenta a vida útil do aparelho.</p>
+                    <div class="servico-simples">
+                        <h3>🧹 Manutenção Preventiva</h3>
+                        <p>Limpeza completa, higienização, verificação de gás e componentes. Aumenta a vida útil do aparelho.</p>
+                    </div>
                 </div>
 
+                <!-- 🔄 RECARGA DE GÁS -->
                 <div class="servico-item">
-                    <h3>🔄 Recarga de Gás</h3>
-                    <p>Recarga de gás refrigerante com equipamentos certificados.</p>
+                    <div class="servico-simples">
+                        <h3>🔄 Recarga de Gás</h3>
+                        <p>Recarga de gás refrigerante com equipamentos certificados.</p>
+                    </div>
                 </div>
 
+                <!-- 🏠 RESIDENCIAL -->
                 <div class="servico-item">
-                    <h3>🏠 Residencial</h3>
-                    <p>Atendimento domiciliar com horário agendado.</p>
+                    <div class="servico-simples">
+                        <h3>🏠 Residencial</h3>
+                        <p>Atendimento domiciliar com horário agendado.</p>
+                    </div>
                 </div>
 
+                <!-- 🏢 COMERCIAL -->
                 <div class="servico-item">
-                    <h3>🏢 Comercial</h3>
-                    <p>Contratos de manutenção para empresas, lojas e escritórios.</p>
+                    <div class="servico-simples">
+                        <h3>🏢 Comercial</h3>
+                        <p>Contratos de manutenção para empresas, lojas e escritórios.</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -341,22 +442,22 @@
             <div class="avaliacoes-grid">
                 <div class="avaliacao-card">
                     <div class="estrelas">★★★★★</div>
-                    <p>"Excelente profissional! Instalou meu ar-condicionado com capricho, limpou tudo depois. Recomendo!"</p>
+                    <p class="avaliacao-texto">"Excelente profissional! Instalou meu ar-condicionado com capricho, limpou tudo depois. Recomendo!"</p>
                     <p class="cliente-nome">— Maria Silva</p>
                 </div>
                 <div class="avaliacao-card">
                     <div class="estrelas">★★★★★</div>
-                    <p>"Meu ar parou de gelar, consertou no mesmo dia. Preço justo e serviço de qualidade."</p>
+                    <p class="avaliacao-texto">"Meu ar parou de gelar, consertou no mesmo dia. Preço justo e serviço de qualidade."</p>
                     <p class="cliente-nome">— João Pereira</p>
                 </div>
                 <div class="avaliacao-card">
                     <div class="estrelas">★★★★★</div>
-                    <p>"Contratei manutenção preventiva anual. Sempre pontual e muito educado. Ótimo atendimento!"</p>
+                    <p class="avaliacao-texto">"Contratei manutenção preventiva anual. Sempre pontual e muito educado. Ótimo atendimento!"</p>
                     <p class="cliente-nome">— Ana Costa</p>
                 </div>
                 <div class="avaliacao-card">
                     <div class="estrelas">★★★★★</div>
-                    <p>"Atendeu minha loja com rapidez e profissionalismo. Serviço nota 10!"</p>
+                    <p class="avaliacao-texto">"Atendeu minha loja com rapidez e profissionalismo. Serviço nota 10!"</p>
                     <p class="cliente-nome">— Carlos Mendes</p>
                 </div>
             </div>
@@ -366,9 +467,9 @@
             <h2>📞 Solicite seu Atendimento</h2>
             <p><strong>📱 WhatsApp / Telefone — Éder:</strong></p>
             <p style="font-size: 24px; font-weight: bold;">
-                <a href="https://wa.me/556999176222" style="color: #FFD700;">(69) 99917-6222</a>
+                <a href="https://wa.me/556999176222">(69) 99917-6222</a>
             </p>
-            <p><strong>📷 Instagram:</strong> <a href="https://instagram.com/terlan_climatizacao" style="color: #00FFCC;">@terlan_climatizacao</a></p>
+            <p><strong>📷 Instagram:</strong> <a href="https://instagram.com/terlan_climatizacao">@terlan_climatizacao</a></p>
             <p><strong>📍 Atendimento:</strong> Cerejeira e região de Rondônia</p>
             <a href="https://wa.me/556999176222" class="btn-whatsapp">💬 Chamar no WhatsApp</a>
         </div>
@@ -378,5 +479,14 @@
             <p style="margin-top: 5px;">Atendimento com Garantia • Satisfação e Qualidade</p>
         </footer>
     </div>
+
+    <!-- ✅ JAVASCRIPT PARA ABRIR E FECHAR -->
+    <script>
+        function abrirFechar(botao) {
+            const conteudo = botao.nextElementSibling;
+            botao.classList.toggle('aberto');
+            conteudo.classList.toggle('aberto');
+        }
+    </script>
 </body>
 </html>
