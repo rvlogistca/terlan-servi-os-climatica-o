@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Terlan Climatização | Cerejeira-RO</title>
+    <title>Terlan Climatização LTDA | Cerejeiras-RO</title>
     <style>
         * {
             margin: 0;
@@ -97,6 +97,54 @@
             margin-top: 10px;
         }
 
+        .cnpj-topo {
+            font-size: 13px;
+            color: #5A7099;
+            margin-top: 8px;
+        }
+
+        .botoes-contato {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 25px;
+            flex-wrap: wrap;
+        }
+
+        .btn-whatsapp, .btn-instagram {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 28px;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .btn-whatsapp {
+            background: linear-gradient(135deg, #25D366, #1FB955);
+            color: white;
+            box-shadow: 0 5px 20px rgba(37,211,102,0.35);
+        }
+
+        .btn-whatsapp:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(37,211,102,0.5);
+        }
+
+        .btn-instagram {
+            background: linear-gradient(135deg, #E4405F, #C13584, #833AB4);
+            color: white;
+            box-shadow: 0 5px 20px rgba(228,64,95,0.25);
+        }
+
+        .btn-instagram:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(228,64,95,0.4);
+        }
+
         .card-3d {
             background: linear-gradient(145deg, rgba(15,42,85,0.8), rgba(10,22,41,0.9));
             border: 1px solid rgba(0,82,204,0.3);
@@ -118,7 +166,6 @@
             gap: 15px;
         }
 
-        /* ===== ITEM DE INSTALAÇÃO ===== */
         .servico-item {
             background: rgba(0,82,204,0.1);
             border-left: 3px solid var(--azul-destaque);
@@ -126,7 +173,6 @@
             overflow: hidden;
         }
 
-        /* ===== BOTÃO QUE ABRE E FECHA ===== */
         .servico-botao {
             width: 100%;
             padding: 20px;
@@ -176,7 +222,6 @@
             margin-top: 2px;
         }
 
-        /* ===== CONTEÚDO QUE ABRE ===== */
         .servico-conteudo {
             max-height: 0;
             overflow: hidden;
@@ -219,7 +264,6 @@
             color: #22C55E;
         }
 
-        /* ===== OUTROS SERVIÇOS ===== */
         .servico-simples {
             padding: 18px 20px;
         }
@@ -292,8 +336,8 @@
         }
 
         .contato-card p {
-            font-size: 18px;
-            margin: 12px 0;
+            font-size: 16px;
+            margin: 10px 0;
         }
 
         .contato-card a {
@@ -302,23 +346,18 @@
             text-decoration: none;
         }
 
-        .btn-whatsapp {
-            display: inline-block;
-            background: #25D366;
-            color: white !important;
-            padding: 15px 35px;
-            border-radius: 50px;
-            font-size: 18px;
-            font-weight: bold;
-            margin-top: 15px;
-            box-shadow: 0 5px 25px rgba(37,211,102,0.4);
-            transition: 0.3s;
-            text-decoration: none;
+        .info-empresa {
+            margin-top: 25px;
+            padding: 18px;
+            background: rgba(0,0,0,0.2);
+            border-radius: 12px;
+            border: 1px solid rgba(0,153,255,0.15);
         }
 
-        .btn-whatsapp:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 35px rgba(37,211,102,0.5);
+        .info-empresa p {
+            font-size: 13px;
+            color: #9AB;
+            margin: 5px 0;
         }
 
         footer {
@@ -326,6 +365,8 @@
             padding: 30px;
             color: var(--cinza);
             font-size: 14px;
+            border-top: 1px solid rgba(0,82,204,0.15);
+            margin-top: 10px;
         }
 
         @media (max-width: 768px) {
@@ -339,9 +380,20 @@
     <div class="container">
         <header>
             <div class="logo-3d">❄️</div>
-            <h1>TERLAN CLIMATIZAÇÃO</h1>
-            <p class="subtitulo">Eder Terlan — Conserto • Instalação • Manutenção de Ar Condicionado</p>
-            <p style="margin-top: 10px; color: #00FFCC;">📍 Cerejeira e Região — Rondônia</p>
+            <h1>TERLAN CLIMATIZAÇÃO LTDA</h1>
+            <p class="subtitulo">Éder Terlan — Conserto • Instalação • Manutenção de Ar Condicionado</p>
+            <p style="margin-top: 10px; color: #00FFCC;">📍 Cerejeiras e Região — Rondônia</p>
+            <p class="cnpj-topo">CNPJ: 39.827.701/0001-34</p>
+            
+            <div class="botoes-contato">
+                <a href="https://wa.me/5569999176222?text=Olá! Vi seu site e gostaria de agendar um serviço de Ar Condicionado. Preciso de [instalação / manutenção / conserto / recarga de gás]. Pode me informar os horários disponíveis? Obrigado!" 
+                   target="_blank" class="btn-whatsapp">
+                    💬 Agende pelo WhatsApp
+                </a>
+                <a href="https://www.instagram.com/terlan_climatizacao" target="_blank" class="btn-instagram">
+                    📷 Instagram
+                </a>
+            </div>
         </header>
 
         <div class="fotos-grid">
@@ -357,7 +409,6 @@
             <h2>🔧 Nossos Serviços</h2>
             <div class="servicos-grid">
 
-                <!-- 🧊 INSTALAÇÃO COM ÍCONE DE AR CONDICIONADO -->
                 <div class="servico-item" style="border-left-color: #22C55E;">
                     <button class="servico-botao" onclick="abrirFechar(this)">
                         <div class="botao-cabecalho">
@@ -410,7 +461,6 @@
                     </div>
                 </div>
 
-                <!-- 🛠️ CONSERTO -->
                 <div class="servico-item">
                     <div class="servico-simples">
                         <h3>🛠️ Conserto</h3>
@@ -418,7 +468,6 @@
                     </div>
                 </div>
 
-                <!-- 🧹 MANUTENÇÃO -->
                 <div class="servico-item">
                     <div class="servico-simples">
                         <h3>🧹 Manutenção Preventiva</h3>
@@ -426,7 +475,6 @@
                     </div>
                 </div>
 
-                <!-- 🔄 RECARGA DE GÁS -->
                 <div class="servico-item">
                     <div class="servico-simples">
                         <h3>🔄 Recarga de Gás</h3>
@@ -434,7 +482,6 @@
                     </div>
                 </div>
 
-                <!-- 🏠 RESIDENCIAL -->
                 <div class="servico-item">
                     <div class="servico-simples">
                         <h3>🏠 Residencial</h3>
@@ -442,7 +489,6 @@
                     </div>
                 </div>
 
-                <!-- 🏢 COMERCIAL -->
                 <div class="servico-item">
                     <div class="servico-simples">
                         <h3>🏢 Comercial</h3>
@@ -500,16 +546,23 @@
         <div class="card-3d contato-card">
             <h2>📞 Solicite seu Atendimento</h2>
             <p><strong>📱 WhatsApp / Telefone — Éder:</strong></p>
-            <p style="font-size: 24px; font-weight: bold;">
-                <a href="https://wa.me/556999176222">(69) 99917-6222</a>
+            <p style="font-size: 22px; font-weight: bold;">
+                <a href="https://wa.me/5569999176222">(69) 99917-6222</a>
             </p>
-            <p><strong>📷 Instagram:</strong> <a href="https://instagram.com/terlan_climatizacao">@terlan_climatizacao</a></p>
-            <p><strong>📍 Atendimento:</strong> Cerejeira e região de Rondônia</p>
-            <a href="https://wa.me/556999176222" class="btn-whatsapp">💬 Chamar no WhatsApp</a>
+            <p><strong>📧 E-mail:</strong> <a href="mailto:escritorioancora1@hotmail.com">escritorioancora1@hotmail.com</a></p>
+            <p><strong>📷 Instagram:</strong> <a href="https://www.instagram.com/terlan_climatizacao" target="_blank">@terlan_climatizacao</a></p>
+            <p><strong>📍 Endereço:</strong> Sítio Linha 3, SN — Cerejeiras/RO — CEP 76997-000</p>
+            
+            <div class="info-empresa">
+                <p><strong>🏢 Razão Social:</strong> Terlan Climatização LTDA</p>
+                <p><strong>📌 CNPJ:</strong> 39.827.701/0001-34</p>
+                <p><strong>✅ Situação:</strong> Ativa desde 18/11/2020 — Simples Nacional — Microempresa</p>
+            </div>
         </div>
 
         <footer>
-            <p>© 2026 Terlan Climatização — Éder Terlan | Todos os direitos reservados</p>
+            <p>© 2026 Terlan Climatização LTDA — Éder Terlan | Todos os direitos reservados</p>
+            <p>CNPJ: 39.827.701/0001-34 | Cerejeiras — Rondônia</p>
             <p style="margin-top: 5px;">Atendimento com Garantia • Satisfação e Qualidade</p>
         </footer>
     </div>
